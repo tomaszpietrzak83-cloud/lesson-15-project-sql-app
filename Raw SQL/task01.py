@@ -9,7 +9,8 @@ database_path = file_path / DATABASE_NAME
 
 def delete_task(task_id):
 
+    qr = """--sql DELETE FROM zadania WHERE id = ?"""
     with sqlite3.connect(database_path) as conn:
         cursor = conn.cursor()
-        cursor.execute("DELETE FROM zadania WHERE id = ?", (task_id,))
+        cursor.execute(qr, (task_id,))
         print(f"Zadanie o ID {task_id} zostało usunięte.")
